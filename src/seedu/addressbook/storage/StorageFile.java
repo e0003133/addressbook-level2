@@ -96,14 +96,23 @@ public class StorageFile {
         /* Note: Note the 'try with resource' statement below.
          * More info: https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html
          */
+	boolean isExists = true;
+        if (!path.toFile().exists()) {
+            isExists = false;
+        }
         try (final Writer fileWriter =
                      new BufferedWriter(new FileWriter(path.toFile()))) {
-
+            
             final AdaptedAddressBook toSave = new AdaptedAddressBook(addressBook);
             final Marshaller marshaller = jaxbContext.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             marshaller.marshal(toSave, fileWriter);
+            if (!isExists) {
+        	throw new FileNotFoundException();
+            }
 
+        } catch (FileNotFoundException fnfe) {
+            System.out.println("file was not found but fret not a copy was restored!");
         } catch (IOException ioe) {
             throw new StorageOperationException("Error writing to file: " + path);
         } catch (JAXBException jaxbe) {
