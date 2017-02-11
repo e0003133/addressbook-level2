@@ -62,13 +62,27 @@ public class Name {
     
     /**
      * Returns true of the other name is very similar to this name.
-     * Two names are considered similar if ...
+     * Two names are considered similar if they are equal (case-insensitive), or if they are the same but in a different order
      */
     public boolean isSimilar(Name other) {
         if (other == null) {
             return false;
         }
-        return fullName.equalsIgnoreCase(other.toString());
+        return fullName.equalsIgnoreCase(other.toString()) || isSimilarAnyOrder(other);
+    }
+    
+    private boolean isSimilarAnyOrder(Name other) {
+        List<String> otherTokens = other.getWordsInName();
+        List<String> ownTokens = this.getWordsInName();
+        if (ownTokens.size() != otherTokens.size()) {
+            return false;
+        }
+        for (int i = 0; i < otherTokens.size(); i++) {
+            if (!fullName.contains(otherTokens.get(i))) {
+                return false;
+            }
+        }
+        return true;
     }
     
 }
