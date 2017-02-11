@@ -68,7 +68,7 @@ public class Name {
         if (other == null) {
             return false;
         }
-        return fullName.equals(other.toString());
+        return fullName.equalsIgnoreCase(other.toString());
     }
     
 }
