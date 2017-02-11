@@ -20,6 +20,7 @@ public class NameTest {
         assertTrue(tester.isSimilar(new Name("John K Smith")));
         assertFalse(tester.isSimilar(new Name("John K Smiths")));
         assertTrue(tester.isSimilar(new Name("john k smith")));
+        assertFalse(tester.isSimilar(new Name("John Smith")));
     }
 
 }
