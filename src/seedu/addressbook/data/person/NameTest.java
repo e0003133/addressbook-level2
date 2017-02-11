@@ -7,14 +7,16 @@ import seedu.addressbook.data.exception.IllegalValueException;
 
 public class NameTest {
 
+    private Name tester;
+    
     @Before
     public void setup() throws IllegalValueException {
-        Name tester = new Name("John K Smith");
+        tester = new Name("John K Smith");
     }
     
     @Test
     public void testIsSimilar() throws IllegalValueException {
-        
+        assertFalse(tester.isSimilar(null));
     }
 
 }
