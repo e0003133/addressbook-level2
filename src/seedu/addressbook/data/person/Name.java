@@ -62,7 +62,8 @@ public class Name {
     
     /**
      * Returns true of the other name is very similar to this name.
-     * Two names are considered similar if they are equal (case-insensitive), or if they are the same but in a different order
+     * Two names are considered similar if they are equal (case-insensitive), or if they are the same but 
+     * in a different order (also case-insensitive)
      */
     public boolean isSimilar(Name other) {
         if (other == null) {
@@ -71,6 +72,10 @@ public class Name {
         return fullName.equalsIgnoreCase(other.toString()) || isSimilarAnyOrder(other);
     }
     
+    /**
+     * Private method for isSimilar
+     * Returns true if two names are similar in any order (case-insensitive)
+     */
     private boolean isSimilarAnyOrder(Name other) {
         List<String> otherTokens = other.getWordsInName();
         List<String> ownTokens = this.getWordsInName();
@@ -78,7 +83,11 @@ public class Name {
             return false;
         }
         for (int i = 0; i < otherTokens.size(); i++) {
-            if (!fullName.contains(otherTokens.get(i))) {
+            otherTokens.set(i, otherTokens.get(i).toLowerCase());
+            ownTokens.set(i, ownTokens.get(i).toLowerCase());
+        }
+        for (int i = 0; i < otherTokens.size(); i++) {
+            if (!ownTokens.contains(otherTokens.get(i))) {
                 return false;
             }
         }

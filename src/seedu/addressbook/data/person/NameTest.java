@@ -16,12 +16,13 @@ public class NameTest {
     
     @Test
     public void testIsSimilar() throws IllegalValueException {
-        assertFalse(tester.isSimilar(null));
-        assertTrue(tester.isSimilar(new Name("John K Smith")));
-        assertFalse(tester.isSimilar(new Name("John K Smiths")));
-        assertTrue(tester.isSimilar(new Name("john k smith")));
-        assertFalse(tester.isSimilar(new Name("John Smith")));
-        assertTrue(tester.isSimilar(new Name("Smith John K")));
+        assertFalse(tester.isSimilar(null)); // test for null
+        assertTrue(tester.isSimilar(new Name("John K Smith"))); // test equal strings
+        assertFalse(tester.isSimilar(new Name("John K Smiths"))); // test not equal strings
+        assertTrue(tester.isSimilar(new Name("john k smith"))); // test equal strings (ignore case)
+        assertFalse(tester.isSimilar(new Name("John Smith"))); // test subset/superset
+        assertTrue(tester.isSimilar(new Name("Smith John K"))); // test same but in different order
+        assertTrue(tester.isSimilar(new Name("smith john k"))); // test same in different order (ignoring case)
     }
 
 }
