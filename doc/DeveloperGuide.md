@@ -51,3 +51,39 @@
 * Problem: Test fails during the very first time.<br>
   Solution: The output of the very first test run could be slightly different because the program
   creates a new storage file. Tests should pass from the 2nd run onwards.
+
+### User stories
+As a user, I want to be able to write notes for each contact, so I can know how I know them.
+As a user, I can sort the contacts by when I first met them, so I can know who I've been friends with the longest.
+As a user, I can add their social media handles so I can find them online.
+
+### Use cases
+System: Address Book
+Use Case: UC1 - Rename Existing Tag
+Actor: User
+MSS:
+1. User requests to rename tag
+2. Address Book asks which tag user would like to rename
+3. User enters tag he would like to rename
+4. Address Book shows a list of users with those tags and asks what user would like to rename tag to
+5. User enters his desired tag
+6. Address Book requests for confirmation, to change from <old tag> to <new tag>
+7. User confirms rename.
+8. Address Book renames all contacts with the old tag to new tag, and displays to user a list of contacts with their tags changed.
+	Use case ends.
+Extensions: 
+3a. Address Book detects no such tag exists.
+3a1. Address Book shows a list of existing tags and requests for tag to be renamed
+3a2. User enters new tag to be renamed.
+Steps 3a1-3a2 repeated until user enters a tag that exists
+Use Case resumes from Step 4.
+
+*a. At any time, user chooses to cancel rename
+*a1. Address Book requests to confirm cancellation
+*a2. User confirms cancellation
+Use Case ends.
+
+### Non-functional requirements
+Technical requirements: Address Book should work on both 32-bit & 64-bit environments
+Performance requirements: Address Book should be ready to use within two seconds.
+Quality requirements: Address Book should be intuitive and usable by a novice
